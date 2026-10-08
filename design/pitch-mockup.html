@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<title>SMART ANTI-FLOOD AI – Pitch mockup</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #ffffff; --ink: #0f172a; --ink2: #475569; --ink3: #94a3b8; --line: #e5e7eb;
+    --accent: #0284c7; --accent-soft: #e0f2fe;
+    --ok: #10b981; --watch: #f59e0b; --warn: #f97316; --high: #dc2626;
+    --night: #0b1220;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #d1d5db; font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .frame { width: 1440px; height: 900px; background: var(--bg); display: grid; grid-template-columns: 232px 1fr; grid-template-rows: 64px 1fr; margin: 40px auto; overflow: hidden; position: relative; }
+  .mono { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }
+
+  /* Top bar */
+  .top { grid-column: 1 / 3; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; background: var(--panel); border-bottom: 1px solid var(--line); }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .logo { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, #0ea5e9, #1d4ed8); display: grid; place-items: center; }
+  .brand b { font-size: 16px; letter-spacing: -0.01em; }
+  .brand span { font-size: 12px; color: var(--ink3); }
+  .top-right { display: flex; gap: 10px; align-items: center; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink2); background: #fff; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; padding: 9px 14px; border-radius: 10px; border: 1px solid var(--line); background: #fff; color: var(--ink); }
+  .btn.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .btn.danger { background: var(--high); color: #fff; border-color: var(--high); }
+
+  /* Sidebar */
+  .side { background: var(--panel); border-right: 1px solid var(--line); padding: 18px 14px; display: flex; flex-direction: column; gap: 18px; }
+  .navgroup small { display: block; font-size: 11px; font-weight: 600; color: var(--ink3); padding: 0 10px 6px; }
+  .nav { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; font-size: 13.5px; color: var(--ink2); font-weight: 500; }
+  .nav.on { background: var(--accent-soft); color: #075985; font-weight: 600; }
+  .nav i { width: 16px; height: 16px; border: 1.8px solid currentColor; border-radius: 4px; opacity: .7; }
+  .nav .badge { margin-left: auto; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 999px; background: #fee2e2; color: var(--high); }
+  .side-foot { margin-top: auto; font-size: 11.5px; color: var(--ink3); padding: 0 10px; line-height: 1.5; }
+  .side-foot b { color: var(--ink2); display: block; }
+
+  /* Content */
+  .main { padding: 24px 28px; display: flex; flex-direction: column; gap: 18px; overflow: hidden; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; }
+  .h-eyebrow { font-size: 12px; font-weight: 600; color: var(--accent); }
+  .h1 { font-size: 30px; font-weight: 750; letter-spacing: -0.02em; line-height: 1.15; }
+  .h2 { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+  .sub { font-size: 13.5px; color: var(--ink2); line-height: 1.5; }
+  .label { font-size: 12px; color: var(--ink3); font-weight: 500; }
+  .big { font-size: 28px; font-weight: 750; letter-spacing: -0.02em; }
+  .note { position: absolute; right: 18px; bottom: 14px; font-size: 11px; color: var(--ink3); background: #fff; border: 1px dashed #cbd5e1; padding: 4px 8px; border-radius: 6px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 4px 9px; border-radius: 999px; }
+  .bar { height: 6px; border-radius: 99px; background: #eef2f7; overflow: hidden; }
+  .bar > span { display: block; height: 100%; border-radius: 99px; }
+  .row { display: flex; gap: 18px; }
+</style>
+</head>
+<body>
+
+<!-- ================= FRAME 1: OVERVIEW ================= -->
+<section class="frame" id="f1">
+  <div class="top" data-top></div>
+  <aside class="side" data-side="overview"></aside>
+  <main class="main">
+    <div class="card" style="padding:0; overflow:hidden; display:grid; grid-template-columns: 360px 1fr; height: 470px; background: var(--night); border-color: #1e293b;">
+      <div style="padding: 30px 28px; display:flex; flex-direction:column; gap:16px; color:#e2e8f0;">
+        <span class="h-eyebrow" style="color:#7dd3fc">Ngã tư Cầu Giấy · Camera C-01</span>
+        <div class="h1" style="color:#fff">Phát hiện cống tắc<br/>trước khi đường ngập.</div>
+        <p class="sub" style="color:#94a3b8">Camera nhìn miệng cống, AI nhận diện rác, Rule Engine kết hợp với lượng mưa và mực nước để báo cho đội thoát nước <b style="color:#e2e8f0">trước</b> khi nước kịp dâng.</p>
+        <div style="display:flex; gap:10px; margin-top:4px;">
+          <span class="btn" style="background:#0ea5e9; border-color:#0ea5e9; color:#0b1220">▶ Phát lại cơn mưa</span>
+          <span class="btn" style="background:transparent; color:#e2e8f0; border-color:#334155">Xem bản đồ</span>
+        </div>
+        <div style="margin-top:auto; display:grid; grid-template-columns: repeat(3,1fr); gap:10px; border-top:1px solid #1e293b; padding-top:16px;">
+          <div><div class="mono" style="font-size:20px; font-weight:700; color:#fff">4</div><div style="font-size:11.5px; color:#94a3b8">trạng thái cống AI nhận diện</div></div>
+          <div><div class="mono" style="font-size:20px; font-weight:700; color:#fff">0 đ</div><div style="font-size:11.5px; color:#94a3b8">chi phí máy chủ – chạy trên trình duyệt</div></div>
+          <div><div class="mono" style="font-size:20px; font-weight:700; color:#fff">1</div><div style="font-size:11.5px; color:#94a3b8">camera có sẵn là đủ</div></div>
+        </div>
+      </div>
+      <div data-scene='{"cls":"BLOCKED","rain":55,"water":78,"risk":"HIGH"}' style="position:relative"></div>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr 1.25fr; gap:14px; height: 302px;">
+      <div class="card" style="padding:18px; display:flex; flex-direction:column; gap:10px;">
+        <span class="label">Lượng mưa</span>
+        <div><span class="big mono">55</span> <span class="label">mm/h</span></div>
+        <span class="chip" style="background:#fef2f2; color:var(--high); width:max-content">Mưa lớn · trên ngưỡng 50</span>
+        <svg viewBox="0 0 220 70" style="margin-top:auto">
+          <path d="M0 62 C30 60 40 55 60 50 S100 30 120 26 S170 14 220 10 L220 70 L0 70Z" fill="#e0f2fe"/>
+          <path d="M0 62 C30 60 40 55 60 50 S100 30 120 26 S170 14 220 10" fill="none" stroke="#0284c7" stroke-width="2"/>
+          <line x1="0" y1="20" x2="220" y2="20" stroke="#dc2626" stroke-dasharray="3 3" stroke-width="1"/>
+          <text x="2" y="16" font-size="9" fill="#dc2626">50 mm/h</text>
+        </svg>
+        <span class="label">60 phút qua</span>
+      </div>
+      <div class="card" style="padding:18px; display:flex; flex-direction:column; gap:10px;">
+        <span class="label">Camera AI · miệng cống</span>
+        <div><span class="big">Tắc</span> <span class="mono" style="color:var(--high); font-weight:700">91%</span></div>
+        <div style="display:flex; flex-direction:column; gap:8px; margin-top:4px;" data-classes='[["BLOCKED",91,"#dc2626"],["PARTIAL_BLOCKED",5,"#f97316"],["TRASH_NEARBY",3,"#f59e0b"],["CLEAR",1,"#10b981"]]'></div>
+        <span class="label" style="margin-top:auto">Ngưỡng tin cậy 80% · đạt</span>
+      </div>
+      <div class="card" style="padding:18px; display:flex; flex-direction:column; gap:10px;">
+        <span class="label">Mực nước mặt đường</span>
+        <div><span class="big mono">~39</span> <span class="label">cm · mức cao</span></div>
+        <div style="flex:1; display:flex; gap:14px; align-items:flex-end;">
+          <div style="width:44px; height:150px; border-radius:10px; background:#f1f5f9; position:relative; overflow:hidden; border:1px solid var(--line)">
+            <div style="position:absolute; bottom:0; left:0; right:0; height:78%; background:linear-gradient(#38bdf8,#0369a1)"></div>
+            <div style="position:absolute; left:0; right:0; bottom:70%; border-top:1.5px dashed #dc2626"></div>
+            <div style="position:absolute; left:0; right:0; bottom:35%; border-top:1.5px dashed #f59e0b"></div>
+          </div>
+          <div style="font-size:11.5px; color:var(--ink2); display:flex; flex-direction:column; gap:22px; padding-bottom:10px;">
+            <span><span class="dot" style="background:var(--high)"></span> Cao ≥ 70%</span>
+            <span><span class="dot" style="background:var(--watch)"></span> Vừa ≥ 35%</span>
+            <span><span class="dot" style="background:var(--ok)"></span> Thấp</span>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="padding:20px; display:flex; flex-direction:column; gap:12px; border-color:#fecaca; background: linear-gradient(180deg,#fff,#fff5f5);">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span class="label">Kết luận của Rule Engine</span>
+          <span class="mono" style="font-size:11px; color:var(--ink3)">RULE_HIGH_RISK_01</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span class="dot" style="width:12px;height:12px;background:var(--high); box-shadow:0 0 0 5px #fee2e2"></span>
+          <span style="font-size:24px; font-weight:750; color:var(--high); letter-spacing:-.02em">Nguy cơ ngập cao</span>
+        </div>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:7px; font-size:13px; color:var(--ink2);">
+          <li>✓ Mưa 55 mm/h &gt; ngưỡng 50</li>
+          <li>✓ AI: cống bị rác che kín (91% ≥ 80%)</li>
+          <li>✓ Nước đã dâng mức cao</li>
+        </ul>
+        <div style="margin-top:auto; display:flex; gap:8px;">
+          <span class="btn danger" style="flex:1; justify-content:center">Gửi đội thoát nước</span>
+          <span class="btn">Chi tiết</span>
+        </div>
+      </div>
+    </div>
+  </main>
+</section>
+
+<!-- ================= FRAME 2: MAP ================= -->
+<section class="frame" id="f2">
+  <div class="top" data-top></div>
+  <aside class="side" data-side="map"></aside>
+  <main class="main">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+      <div>
+        <span class="h-eyebrow">Mở rộng từ 1 camera lên cả khu vực</span>
+        <div class="h1" style="font-size:26px">Bản đồ miệng cống · Quận Cầu Giấy</div>
+      </div>
+      <div class="row" style="gap:10px">
+        <span class="pill"><span class="dot" style="background:var(--accent)"></span>8 camera đang giám sát</span>
+        <span class="pill" style="color:var(--high); border-color:#fecaca"><span class="dot" style="background:var(--high)"></span>2 nguy cơ cao</span>
+        <span class="pill"><span class="dot" style="background:var(--watch)"></span>1 đội đang xử lý</span>
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns: 1fr 360px; gap:16px; flex:1; min-height:0;">
+      <div class="card" style="position:relative; overflow:hidden; background:#eef2f6;">
+        <svg viewBox="0 0 800 680" style="width:100%; height:100%; display:block" preserveAspectRatio="xMidYMid slice">
+          <rect width="800" height="680" fill="#eef2f6"/>
+          <!-- blocks -->
+          <g fill="#e2e8f0">
+            <rect x="40" y="40" width="200" height="150" rx="10"/><rect x="290" y="40" width="210" height="150" rx="10"/><rect x="550" y="40" width="210" height="150" rx="10"/>
+            <rect x="40" y="250" width="200" height="170" rx="10"/><rect x="290" y="250" width="210" height="170" rx="10"/><rect x="550" y="250" width="210" height="170" rx="10"/>
+            <rect x="40" y="480" width="200" height="160" rx="10"/><rect x="290" y="480" width="210" height="160" rx="10"/><rect x="550" y="480" width="210" height="160" rx="10"/>
+          </g>
+          <rect x="300" y="270" width="120" height="80" rx="8" fill="#d1fae5"/>
+          <text x="360" y="315" text-anchor="middle" font-size="11" fill="#059669">Công viên</text>
+          <!-- roads -->
+          <g stroke="#fff" stroke-width="40" stroke-linecap="round">
+            <line x1="0" y1="220" x2="800" y2="220"/><line x1="0" y1="450" x2="800" y2="450"/>
+            <line x1="265" y1="0" x2="265" y2="680"/><line x1="525" y1="0" x2="525" y2="680"/>
+          </g>
+          <g font-size="12" fill="#64748b" font-weight="600">
+            <text x="40" y="262">Đường Xuân Thủy</text><text x="310" y="454">Đường Trần Thái Tông</text>
+            <text x="270" y="420" transform="rotate(-90 270 420)">Đường Cầu Giấy</text>
+          </g>
+          <!-- coverage halos -->
+          <circle cx="265" cy="220" r="60" fill="#dc2626" opacity="0.08"/>
+          <circle cx="525" cy="450" r="50" fill="#dc2626" opacity="0.08"/>
+          <!-- pins -->
+          <g data-pins='[[265,220,"#dc2626","C-01"],[525,450,"#dc2626","C-04"],[140,220,"#f97316","C-02"],[525,220,"#f59e0b","C-03"],[680,220,"#10b981","C-05"],[265,450,"#10b981","C-06"],[140,450,"#10b981","C-07"],[680,450,"#f59e0b","C-08"]]'></g>
+        </svg>
+        <!-- popup -->
+        <div class="card" style="position:absolute; left: 300px; top: 64px; width: 270px; padding:12px; box-shadow: 0 12px 30px rgba(15,23,42,.18);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <b style="font-size:13px">C-01 · Ngã tư Cầu Giấy</b>
+            <span class="chip" style="background:#fef2f2; color:var(--high)">Cao</span>
+          </div>
+          <div data-scene='{"cls":"BLOCKED","rain":55,"water":78,"risk":"HIGH","mini":true}' style="height:110px; border-radius:8px; overflow:hidden"></div>
+          <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--ink2); margin-top:8px;">
+            <span>AI: Tắc 91%</span><span>Mưa 55 mm/h</span><span>Nước cao</span>
+          </div>
+        </div>
+        <div style="position:absolute; left:16px; bottom:16px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:8px 12px; display:flex; gap:14px; font-size:12px; color:var(--ink2)">
+          <span><span class="dot" style="background:var(--ok)"></span> An toàn</span><span><span class="dot" style="background:var(--watch)"></span> Theo dõi</span><span><span class="dot" style="background:var(--warn)"></span> Cảnh báo</span><span><span class="dot" style="background:var(--high)"></span> Nguy cơ cao</span>
+        </div>
+      </div>
+      <div class="card" style="padding:18px; display:flex; flex-direction:column; gap:12px;">
+        <div class="h2">Cần xử lý trước</div>
+        <p class="sub" style="font-size:12.5px">Sắp xếp theo mức nguy cơ, rồi theo lượng mưa dự báo.</p>
+        <div data-queue style="display:flex; flex-direction:column; gap:10px;"></div>
+      </div>
+    </div>
+  </main>
+  <span class="note">Bản đồ và dữ liệu minh họa cho phần thuyết trình</span>
+</section>
+
+<!-- ================= FRAME 3: STORM REPLAY ================= -->
+<section class="frame" id="f3">
+  <div class="top" data-top></div>
+  <aside class="side" data-side="replay"></aside>
+  <main class="main">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+      <div>
+        <span class="h-eyebrow">Phát lại một cơn mưa · 60 phút</span>
+        <div class="h1" style="font-size:26px">Cùng một cơn mưa, hai kết cục khác nhau</div>
+      </div>
+      <div class="row" style="gap:8px">
+        <span class="btn">⏮</span><span class="btn primary">❚❚ Tạm dừng</span><span class="btn">1× · 2× · 4×</span>
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:14px; height: 330px;">
+      <div class="card" style="overflow:hidden; position:relative; background:var(--night)">
+        <div data-scene='{"cls":"BLOCKED","rain":70,"water":92,"risk":"HIGH"}' style="height:100%"></div>
+        <div style="position:absolute; left:14px; bottom:14px; background:rgba(2,6,23,.75); color:#fecaca; padding:8px 12px; border-radius:10px; font-size:13px;">
+          <b style="color:#fff; display:block">Không có hệ thống</b>Nước ~46 cm · chờ người dân báo
+        </div>
+      </div>
+      <div class="card" style="overflow:hidden; position:relative; background:var(--night)">
+        <div data-scene='{"cls":"CLEAR","rain":70,"water":24,"risk":"WATCH"}' style="height:100%"></div>
+        <div style="position:absolute; left:14px; bottom:14px; background:rgba(2,6,23,.75); color:#a7f3d0; padding:8px 12px; border-radius:10px; font-size:13px;">
+          <b style="color:#fff; display:block">Có SMART ANTI-FLOOD AI</b>Cống đã được dọn lúc 17:24 · nước ~12 cm
+        </div>
+      </div>
+    </div>
+    <div class="card" style="padding:18px 20px; flex:1; display:flex; flex-direction:column; gap:8px;">
+      <div style="display:flex; justify-content:space-between;">
+        <span class="h2">Diễn biến mực nước</span>
+        <span style="display:flex; gap:16px; font-size:12px; color:var(--ink2)">
+          <span><span style="display:inline-block; width:18px; border-top:2px dashed var(--high); vertical-align:middle"></span> Không có hệ thống</span>
+          <span><span style="display:inline-block; width:18px; border-top:2.5px solid var(--accent); vertical-align:middle"></span> Có hệ thống</span>
+          <span><span style="display:inline-block; width:12px; height:10px; background:#e0f2fe; vertical-align:middle"></span> Lượng mưa</span>
+        </span>
+      </div>
+      <svg viewBox="0 0 1100 230" style="width:100%; flex:1">
+        <!-- rain area -->
+        <path d="M40 200 C120 196 180 180 260 150 S400 70 470 60 S600 70 680 110 S860 180 1060 196 L1060 200 Z" fill="#e0f2fe"/>
+        <!-- grid -->
+        <g stroke="#eef2f7"><line x1="40" y1="40" x2="1060" y2="40"/><line x1="40" y1="100" x2="1060" y2="100"/><line x1="40" y1="160" x2="1060" y2="160"/></g>
+        <line x1="40" y1="200" x2="1060" y2="200" stroke="#cbd5e1"/>
+        <g font-size="11" fill="#94a3b8" class="mono">
+          <text x="40" y="218">17:00</text><text x="210" y="218">17:10</text><text x="380" y="218">17:20</text><text x="550" y="218">17:30</text><text x="720" y="218">17:40</text><text x="890" y="218">17:50</text><text x="1030" y="218">18:00</text>
+          <text x="6" y="44">50cm</text><text x="6" y="104">30cm</text><text x="6" y="164">10cm</text>
+        </g>
+        <!-- without -->
+        <path d="M40 196 C150 192 230 175 300 150 S420 70 520 48 S700 40 800 60 S950 110 1060 140" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="7 6"/>
+        <!-- with -->
+        <path d="M40 196 C150 192 230 178 300 166 S380 160 420 162 S520 178 600 186 S900 194 1060 196" fill="none" stroke="#0284c7" stroke-width="3"/>
+        <!-- events -->
+        <g data-events='[[125,"17:05","AI thấy rác gần cống","#f59e0b"],[175,"17:08","AI: cống bị che","#f97316"],[210,"17:10","Cảnh báo + Ticket","#dc2626"],[448,"17:24","Công nhân dọn xong","#0284c7"],[482,"17:26","AI nghiệm thu: sạch","#10b981"]]'></g>
+        <!-- playhead -->
+        <line x1="620" y1="20" x2="620" y2="200" stroke="#0f172a" stroke-width="1.5"/>
+        <circle cx="620" cy="20" r="5" fill="#0f172a"/>
+        <text x="628" y="24" font-size="11" font-weight="700" fill="#0f172a" class="mono">17:34</text>
+      </svg>
+    </div>
+  </main>
+  <span class="note">Kịch bản minh họa – không phải số đo thực tế</span>
+</section>
+
+<!-- ================= FRAME 4: AI EVIDENCE ================= -->
+<section class="frame" id="f4">
+  <div class="top" data-top></div>
+  <aside class="side" data-side="evidence"></aside>
+  <main class="main">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+      <div>
+        <span class="h-eyebrow">Bằng chứng khoa học</span>
+        <div class="h1" style="font-size:26px">AI của chúng em chính xác đến đâu?</div>
+      </div>
+      <span class="pill" style="border-style:dashed">Số liệu mẫu – thay bằng kết quả kiểm thử thật của đội</span>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 300px 1fr 1fr; gap:14px; height: 360px;">
+      <div class="card" style="padding:20px; display:flex; flex-direction:column; gap:14px;">
+        <span class="label">Độ chính xác trên ảnh kiểm thử</span>
+        <div style="display:flex; align-items:center; gap:16px;">
+          <svg viewBox="0 0 120 120" width="120" height="120">
+            <circle cx="60" cy="60" r="50" fill="none" stroke="#eef2f7" stroke-width="12"/>
+            <circle cx="60" cy="60" r="50" fill="none" stroke="#0284c7" stroke-width="12" stroke-linecap="round" stroke-dasharray="276 314" transform="rotate(-90 60 60)"/>
+            <text x="60" y="66" text-anchor="middle" font-size="24" font-weight="800" fill="#0f172a">88%</text>
+          </svg>
+          <div class="sub" style="font-size:12.5px">trên <b>120</b> ảnh chưa từng dùng để huấn luyện</div>
+        </div>
+        <div style="border-top:1px solid var(--line); padding-top:12px; display:flex; flex-direction:column; gap:9px;">
+          <span class="label">Ảnh huấn luyện theo lớp</span>
+          <div data-classes='[["CLEAR",150,"#10b981",150],["TRASH_NEARBY",120,"#f59e0b",150],["PARTIAL_BLOCKED",110,"#f97316",150],["BLOCKED",140,"#dc2626",150]]' style="display:flex; flex-direction:column; gap:8px;"></div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:20px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+          <span class="h2">Ma trận nhầm lẫn</span><span class="label">hàng = thực tế · cột = AI dự đoán</span>
+        </div>
+        <div data-matrix></div>
+      </div>
+
+      <div class="card" style="padding:20px; display:flex; flex-direction:column; gap:12px;">
+        <span class="h2">Vì sao cắt vùng miệng cống (ROI)?</span>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; flex:1;">
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div data-scene='{"cls":"PARTIAL_BLOCKED","rain":20,"water":20,"risk":"WATCH","mini":true}' style="border-radius:10px; overflow:hidden; flex:1"></div>
+            <span class="label">Cả khung hình</span>
+            <div style="font-size:13px"><b class="mono">71%</b> <span class="sub">chính xác</span></div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div data-roi style="border-radius:10px; overflow:hidden; flex:1; background:#1f2937"></div>
+            <span class="label">Chỉ vùng ROI 224×224</span>
+            <div style="font-size:13px"><b class="mono" style="color:var(--accent)">88%</b> <span class="sub">chính xác</span></div>
+          </div>
+        </div>
+        <p class="sub" style="font-size:12.5px">Bỏ xe cộ, người đi bộ và bóng râm khỏi ảnh giúp AI tập trung vào rác trên lưới cống.</p>
+      </div>
+    </div>
+
+    <div class="card" style="padding:18px 20px; flex:1; display:flex; flex-direction:column;">
+      <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+        <span class="h2">Ví dụ dự đoán</span><span class="label">kể cả trường hợp AI đoán sai – để thấy hướng cải thiện</span>
+      </div>
+      <div data-examples style="display:grid; grid-template-columns: repeat(6,1fr); gap:12px;"></div>
+    </div>
+  </main>
+</section>
+
+<script>
+  // ---------- shared chrome ----------
+  const TOP = `
+    <div class="brand">
+      <div class="logo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 3c3 4 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 3-7 6-11z"/></svg></div>
+      <div><b>SMART ANTI-FLOOD AI</b><br/><span>Đội NEWTON AI · Phát hiện sớm – Cảnh báo sớm – Hành động sớm</span></div>
+    </div>
+    <div class="top-right">
+      <span class="pill"><span class="dot" style="background:var(--watch)"></span>Chế độ mô phỏng</span>
+      <span class="pill" style="color:var(--high); border-color:#fecaca"><span class="dot" style="background:var(--high)"></span>Nguy cơ cao · C-01</span>
+      <span class="btn primary">Kịch bản trình bày</span>
+    </div>`;
+  const NAV = [
+    ['Trình bày', [['overview','Tổng quan'],['map','Bản đồ khu vực'],['replay','Phát lại cơn mưa']]],
+    ['Hệ thống', [['camera','Camera AI'],['alerts','Cảnh báo','2'],['tickets','Ticket xử lý']]],
+    ['Khoa học', [['evidence','Bằng chứng AI'],['how','AI hoạt động thế nào'],['team','Về đội thi']]],
+  ];
+  document.querySelectorAll('[data-top]').forEach(el => el.innerHTML = TOP);
+  document.querySelectorAll('[data-side]').forEach(el => {
+    const on = el.dataset.side;
+    el.innerHTML = NAV.map(([g, items]) => `<div class="navgroup"><small>${g}</small>${items.map(([id, l, b]) =>
+      `<div class="nav ${id===on?'on':''}"><i></i>${l}${b?`<span class="badge">${b}</span>`:''}</div>`).join('')}</div>`).join('')
+      + `<div class="side-foot"><b>Trường THCS &amp; THPT Newton</b>Sản phẩm dự thi KHKT</div>`;
+  });
+
+  // ---------- street scene ----------
+  const RISK = { NORMAL:['#10b981','An toàn'], WATCH:['#f59e0b','Theo dõi'], WARNING:['#f97316','Cảnh báo'], HIGH:['#dc2626','Nguy cơ ngập cao'] };
+  const rnd = (i, s) => { const x = Math.sin(i*12.9898 + s*78.233)*43758.5453; return x - Math.floor(x); };
+  function trash(x, y, k, r) {
+    const t = `transform="translate(${x} ${y}) rotate(${r})"`;
+    if (k===0) return `<path ${t} d="M-14 0 Q-12 -14 0 -12 Q12 -14 14 0 Q0 6 -14 0Z" fill="#e2e8f0" stroke="#94a3b8"/>`;
+    if (k===1) return `<g ${t}><rect x="-12" y="-5" width="20" height="10" rx="3" fill="#38bdf8"/><rect x="8" y="-2.5" width="6" height="5" fill="#0284c7"/></g>`;
+    return `<path ${t} d="M-10 0 Q0 -9 10 0 Q0 9 -10 0Z" fill="${k===2?'#65a30d':'#a16207'}"/>`;
+  }
+  function scene({ cls, rain, water, risk, mini }) {
+    const W = 800, H = 470, G = 330, GX = 430, GW = 110;
+    const [rc, rl] = RISK[risk];
+    const drops = Array.from({length: Math.min(160, rain*2)}, (_, i) => {
+      const x = rnd(i,1)*W, y = rnd(i,2)*G, l = 10 + rnd(i,3)*12;
+      return `<line x1="${x}" y1="${y}" x2="${x-4}" y2="${y+l}"/>`;
+    }).join('');
+    const depth = water/100*110, wt = G - depth;
+    let items = [];
+    if (cls==='TRASH_NEARBY') items = [[GX-70,G-6,0,-8],[GX-40,G-4,2,20],[GX+GW+40,G-5,1,10]];
+    if (cls==='PARTIAL_BLOCKED') items = [[GX+18,G-4,0,4],[GX+45,G-3,2,-25],[GX-30,G-5,1,-6],[GX+62,G-2,3,40]];
+    if (cls==='BLOCKED') items = Array.from({length:9}, (_, i) => [GX+8+i*12, G-3-(i%3)*3, i%4, (i*37)%60-30]);
+    const cap = {CLEAR:1, TRASH_NEARBY:.85, PARTIAL_BLOCKED:.4, BLOCKED:.08}[cls];
+    const flow = Array.from({length: Math.round(cap*12)}, (_, i) => `<circle cx="${GX+50+i*26}" cy="${388+((i%3)-1)*6}" r="4" fill="#38bdf8"/>`).join('');
+    const label = `ROI · ${cls} ${cls==='CLEAR'?'94':cls==='BLOCKED'?'91':'82'}%`;
+    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%;display:block">
+      <defs><linearGradient id="sky${cls}${risk}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#020617"/><stop offset="1" stop-color="#1e293b"/></linearGradient>
+      <linearGradient id="wt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#38bdf8" stop-opacity=".75"/><stop offset="1" stop-color="#0369a1" stop-opacity=".9"/></linearGradient></defs>
+      <rect width="${W}" height="${G}" fill="url(#sky${cls}${risk})"/>
+      <g fill="#0b1220"><rect x="0" y="170" width="80" height="${G-170}"/><rect x="85" y="130" width="60" height="${G-130}"/><rect x="590" y="150" width="60" height="${G-150}"/><rect x="655" y="100" width="80" height="${G-100}"/><rect x="740" y="180" width="60" height="${G-180}"/></g>
+      <g fill="#fbbf24" opacity=".35">${[0,1,2,3,4].map(r=>[0,1].map(c=>`<rect x="${670+c*30}" y="${118+r*30}" width="12" height="10"/>`).join('')).join('')}</g>
+      <g stroke="#bae6fd" stroke-width="1.5" stroke-linecap="round" opacity="${.3+Math.min(.5,rain/120)}">${drops}</g>
+      <rect x="196" y="110" width="7" height="${G-110}" fill="#475569"/><rect x="196" y="110" width="72" height="6" fill="#475569"/>
+      <rect x="258" y="112" width="36" height="20" rx="4" fill="#e2e8f0"/><rect x="290" y="117" width="10" height="10" rx="2" fill="#334155"/><circle cx="295" cy="122" r="3" fill="#ef4444"/>
+      <path d="M300 128 L${GX-18} ${G-34} L${GX+GW+18} ${G-34}Z" fill="#38bdf8" opacity=".09"/>
+      <rect x="0" y="${G}" width="${W}" height="${H-G}" fill="#1f2937"/><rect x="0" y="${G}" width="${W}" height="7" fill="#4b5563"/>
+      ${[40,150,260,610,710].map(x=>`<rect x="${x}" y="${G+18}" width="54" height="4" fill="#9ca3af" opacity=".5"/>`).join('')}
+      ${depth>1?`<rect x="0" y="${wt}" width="${W}" height="${depth}" fill="url(#wt)"/><path d="M0 ${wt} ${Array.from({length:17},(_,i)=>`q25 -5 50 0`).join(' ')} V${wt+6} H0Z" fill="#7dd3fc" opacity=".6"/>`:''}
+      <rect x="${GX}" y="${G-2}" width="${GW}" height="13" rx="2" fill="#111827" stroke="#6b7280"/>
+      ${Array.from({length:9},(_,i)=>`<rect x="${GX+6+i*11.5}" y="${G}" width="5" height="9" fill="#374151"/>`).join('')}
+      ${cap>.3?`<g fill="none" stroke="#7dd3fc" stroke-width="2.2" stroke-dasharray="6 5"><path d="M${GX-55} ${G-9} q30 0 48 13"/><path d="M${GX+GW+55} ${G-9} q-30 0 -48 13"/></g>`:''}
+      ${items.map(a=>trash(...a)).join('')}
+      ${cls==='BLOCKED'?`<g transform="translate(${GX+GW/2} ${G+30})"><circle r="12" fill="#dc2626"/><path d="M-5 -5 L5 5 M5 -5 L-5 5" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></g>`:''}
+      <rect x="${GX-24}" y="${G-34}" width="${GW+48}" height="54" fill="none" stroke="${rc}" stroke-width="2.2" stroke-dasharray="7 4" rx="4"/>
+      <rect x="${GX-24}" y="${G-54}" width="${Math.max(GW+48, label.length*7+14)}" height="18" rx="3" fill="${rc}"/>
+      <text x="${GX-17}" y="${G-41}" font-size="11" font-weight="700" fill="#fff" font-family="ui-monospace,Menlo,monospace">${label}</text>
+      <rect x="${GX+30}" y="${G+11}" width="42" height="48" fill="#0f172a"/>
+      <rect x="${GX+20}" y="370" width="${W-GX-20}" height="36" rx="18" fill="#0f172a" stroke="#334155"/>
+      ${flow}
+      <text x="${W-18}" y="440" text-anchor="end" font-size="11" fill="#94a3b8" font-family="ui-monospace,Menlo,monospace">Ống thoát nước · lưu lượng ~${Math.round(cap*100)}%</text>
+      ${mini?'':`<g transform="translate(${W-44} ${G-110})"><rect width="6" height="110" fill="#e2e8f0" opacity=".25"/>${[0,27,55,82,110].map(y=>`<rect y="${y}" width="12" height="1.5" fill="#e2e8f0" opacity=".6"/>`).join('')}
+        <text x="-8" y="${Math.max(12,110-depth+4)}" text-anchor="end" font-size="12" font-weight="700" fill="#e0f2fe" font-family="ui-monospace,Menlo,monospace">~${Math.round(water/2)} cm</text></g>
+      <g transform="translate(${W-18} 18)"><rect x="${-rl.length*8.2-24}" width="${rl.length*8.2+24}" height="28" rx="8" fill="${rc}"/><text x="-12" y="19" text-anchor="end" font-size="13" font-weight="800" fill="#fff">${rl}</text></g>
+      <g transform="translate(18 18)" font-size="12" font-weight="600" fill="#e0f2fe"><rect width="104" height="26" rx="7" fill="rgba(0,0,0,.45)"/><text x="10" y="17">☔ ${rain} mm/h</text>
+        <rect x="112" width="118" height="26" rx="7" fill="rgba(0,0,0,.45)"/><text x="122" y="17">Camera C-01 · live</text></g>`}
+    </svg>`;
+  }
+  document.querySelectorAll('[data-scene]').forEach(el => el.innerHTML = scene(JSON.parse(el.dataset.scene)));
+
+  // ROI crop thumbnail (zoomed drain)
+  document.querySelectorAll('[data-roi]').forEach(el => el.innerHTML = `<svg viewBox="0 0 224 224" style="width:100%;height:100%;display:block" preserveAspectRatio="xMidYMid slice">
+    <rect width="224" height="224" fill="#1f2937"/><rect x="0" y="0" width="224" height="70" fill="#334155" opacity=".5"/>
+    <rect x="22" y="96" width="180" height="40" rx="4" fill="#111827" stroke="#6b7280" stroke-width="2"/>
+    ${Array.from({length:9},(_,i)=>`<rect x="${32+i*19}" y="104" width="9" height="24" fill="#374151"/>`).join('')}
+    ${trash(70,100,0,4)}${trash(118,102,2,-25)}${trash(150,103,3,40)}
+    <rect x="3" y="3" width="218" height="218" fill="none" stroke="#f59e0b" stroke-width="3" stroke-dasharray="8 5"/>
+    <text x="40" y="200" font-size="11" fill="#fde68a" font-family="ui-monospace,Menlo,monospace">224 × 224</text></svg>`);
+
+  // class bars
+  document.querySelectorAll('[data-classes]').forEach(el => {
+    el.innerHTML = JSON.parse(el.dataset.classes).map(([n, v, c, max]) => `
+      <div><div style="display:flex; justify-content:space-between; font-size:12px; color:var(--ink2); margin-bottom:4px;"><span class="mono">${n}</span><span class="mono">${v}${max?'':'%'}</span></div>
+      <div class="bar"><span style="width:${(v/(max||100))*100}%; background:${c}"></span></div></div>`).join('');
+  });
+
+  // map pins
+  document.querySelectorAll('[data-pins]').forEach(g => {
+    g.innerHTML = JSON.parse(g.dataset.pins).map(([x, y, c, id]) => `
+      <g transform="translate(${x} ${y})"><circle r="15" fill="${c}" opacity=".2"/><circle r="9" fill="${c}" stroke="#fff" stroke-width="3"/>
+      <text y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">${id}</text></g>`).join('');
+  });
+
+  // queue
+  const Q = [
+    ['C-01','Ngã tư Cầu Giấy','Tắc 91% · nước cao','#dc2626','Nguy cơ cao','Ticket #0002 · chờ nhận'],
+    ['C-04','Trần Thái Tông','Tắc 87% · mưa 55','#dc2626','Nguy cơ cao','Đội 3 đang đến · 6 phút'],
+    ['C-02','Xuân Thủy – Hồ Tùng Mậu','Che một phần 82%','#f97316','Cảnh báo','Đề xuất tạo ticket'],
+    ['C-03','Xuân Thủy – Nguyễn Phong Sắc','Rác gần cống 84%','#f59e0b','Theo dõi','Tiếp tục quan sát'],
+    ['C-08','Trần Thái Tông – Dịch Vọng','Rác gần cống 79%','#f59e0b','Theo dõi','Tiếp tục quan sát'],
+  ];
+  document.querySelector('[data-queue]').innerHTML = Q.map(([id, n, ai, c, r, s]) => `
+    <div style="border:1px solid var(--line); border-left:4px solid ${c}; border-radius:10px; padding:10px 12px; display:flex; flex-direction:column; gap:3px;">
+      <div style="display:flex; justify-content:space-between; align-items:center;"><b style="font-size:13px">${id} · ${n}</b><span class="chip" style="background:${c}1a; color:${c}">${r}</span></div>
+      <span style="font-size:12px; color:var(--ink2)">${ai}</span><span style="font-size:11.5px; color:var(--ink3)">${s}</span></div>`).join('');
+
+  // replay events
+  document.querySelectorAll('[data-events]').forEach(g => {
+    g.innerHTML = JSON.parse(g.dataset.events).map(([x, t, l, c], i) => `
+      <g transform="translate(${x} 0)"><line y1="${30+i*0}" y2="200" stroke="${c}" stroke-width="1" stroke-dasharray="2 3" opacity=".7"/>
+      <circle cy="${196}" r="5" fill="${c}"/>
+      <g transform="translate(0 ${18 + (i%3)*24})"><rect x="-2" y="-12" width="${l.length*6.2+46}" height="18" rx="5" fill="#fff" stroke="${c}"/>
+      <text x="4" y="1" font-size="10.5" fill="#0f172a"><tspan font-weight="700" fill="${c}">${t}</tspan> ${l}</text></g></g>`).join('');
+  });
+
+  // confusion matrix
+  const L = ['CLEAR','TRASH','PARTIAL','BLOCKED'];
+  const M = [[28,2,0,0],[3,25,2,0],[0,3,24,3],[0,0,1,29]];
+  document.querySelector('[data-matrix]').innerHTML = `
+    <div style="display:grid; grid-template-columns: 70px repeat(4,1fr); gap:5px; font-size:11px;">
+      <div></div>${L.map(l=>`<div class="mono" style="text-align:center; color:var(--ink3)">${l}</div>`).join('')}
+      ${M.map((row,i)=>`<div class="mono" style="color:var(--ink3); display:flex; align-items:center">${L[i]}</div>${row.map((v,j)=>{
+        const a = v/30; const diag = i===j;
+        return `<div class="mono" style="height:58px; border-radius:8px; display:grid; place-items:center; font-size:16px; font-weight:700;
+          background:${diag?`rgba(2,132,199,${.15+a*.85})`:`rgba(220,38,38,${v?0.12+a*1.2:0.03})`}; color:${diag&&a>.5?'#fff':'#0f172a'}">${v}</div>`;}).join('')}`).join('')}
+    </div>
+    <p class="sub" style="font-size:12px; margin-top:12px">Lỗi hay gặp nhất: nhầm <b>PARTIAL</b> với <b>BLOCKED</b> – hai trạng thái liền kề. Hướng cải thiện: chụp thêm ảnh lúc trời mưa và ban đêm.</p>`;
+
+  // example predictions
+  const EX = [['CLEAR','CLEAR',96,1],['TRASH_NEARBY','TRASH_NEARBY',84,1],['PARTIAL_BLOCKED','PARTIAL_BLOCKED',81,1],['BLOCKED','BLOCKED',93,1],['PARTIAL_BLOCKED','BLOCKED',62,0],['CLEAR','TRASH_NEARBY',58,0]];
+  document.querySelector('[data-examples]').innerHTML = EX.map(([truth, pred, c, ok]) => `
+    <div style="display:flex; flex-direction:column; gap:6px;">
+      <div style="height:190px; border-radius:10px; overflow:hidden; outline:2px solid ${ok?'#a7f3d0':'#fecaca'}">${scene({cls: truth, rain: 20, water: 15, risk: ok?'NORMAL':'HIGH', mini: true})}</div>
+      <div style="font-size:11.5px; display:flex; justify-content:space-between;"><span class="mono">${pred}</span><b class="mono" style="color:${ok?'var(--ok)':'var(--high)'}">${c}%</b></div>
+      <span style="font-size:11px; color:var(--ink3)">${ok?'✓ Đúng':'✗ Thực tế: '+truth}</span>
+    </div>`).join('');
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+@import "tailwindcss";
+@source "./";
+
+@theme {
+  --font-sans: "Be Vietnam Pro", system-ui, sans-serif;
+  --font-serif: "Newsreader", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-paper: #f3f1ec;
+  --color-sheet: #faf9f6;
+  --color-ink: #141413;
+  --color-ink-2: #4f4c46;
+  --color-ink-3: #8b877e;
+  --color-rule: #d8d4ca;
+  --color-rule-2: #e7e4dc;
+
+  --color-signal: #c8371d;   /* high risk only */
+  --color-warn: #d27a1c;
+  --color-watch: #b39226;
+  --color-ok: #2f6f52;
+  --color-water: #2c5878;
+  --color-water-soft: #dfe7ec;
+}
+
+html, body { background: var(--color-paper); color: var(--color-ink); }
+body { font-family: var(--font-sans); font-size: 14px; -webkit-font-smoothing: antialiased; font-feature-settings: "ss01"; }
+.num { font-variant-numeric: tabular-nums; }
+.label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-ink-3); }

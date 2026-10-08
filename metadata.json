@@ -1,0 +1,10 @@
+{
+  "name": "Remix SMART ANTI-FLOOD AI",
+  "description": "Hệ thống AI hỗ trợ phát hiện cống bị tắc và cảnh báo sớm nguy cơ ngập - NEWTON AI",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

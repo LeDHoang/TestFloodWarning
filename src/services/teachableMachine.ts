@@ -41,6 +41,24 @@ export function normalizeTeachableMachineUrl(inputUrl: string): { modelURL: stri
   };
 }
 
+const KNOWN_CLASSES: AIClassType[] = ['CLEAR', 'TRASH_NEARBY', 'PARTIAL_BLOCKED', 'BLOCKED'];
+
+/**
+ * Map a Teachable Machine label to one of the 4 classes the rule engine understands.
+ * "Blocked", "partial-blocked", "Trash nearby" -> BLOCKED, PARTIAL_BLOCKED, TRASH_NEARBY.
+ * Unknown labels are returned unchanged.
+ */
+export function normalizeClassLabel(label: string): string {
+  const key = String(label).trim().toUpperCase().replace(/[\s-]+/g, '_');
+  return (KNOWN_CLASSES as string[]).includes(key) ? key : label;
+}
+
+/** Expected classes that are missing from a loaded model (empty = model is compatible) */
+export function missingClasses(classNames: string[]): AIClassType[] {
+  const found = new Set(classNames.map(normalizeClassLabel));
+  return KNOWN_CLASSES.filter((c) => !found.has(c));
+}
+
 /**
  * Connect and load Teachable Machine model
  */
@@ -165,9 +183,9 @@ export async function predictWithTeachableMachine(
 
   const predictions = await activeModelSession.model.predict(element);
 
-  // Parse prediction results
+  // Parse prediction results (labels normalised so "Blocked", "partial blocked"... still match the rule engine)
   const classes: AIClassInfo[] = predictions.map((p: any) => ({
-    name: p.className,
+    name: normalizeClassLabel(p.className),
     probability: Math.max(0, Math.min(1, p.probability)),
   }));
 

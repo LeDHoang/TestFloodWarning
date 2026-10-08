@@ -20,6 +20,7 @@ export const DemoModeBar: React.FC = () => {
     applyDemoStepPreset,
     setActiveTab,
     createTicket,
+    ruleResult,
   } = useApp();
 
   if (!demoModeActive) return null;
@@ -27,6 +28,8 @@ export const DemoModeBar: React.FC = () => {
   const currentStep = DEMO_STEPS[currentDemoStep];
   const isFirst = currentDemoStep === 0;
   const isLast = currentDemoStep === DEMO_STEPS.length - 1;
+  const expected = currentStep.expectedRisk;
+  const matches = expected ? ruleResult.riskLevel === expected : undefined;
 
   const handleApplyCurrent = () => {
     applyDemoStepPreset(currentDemoStep);
@@ -69,6 +72,19 @@ export const DemoModeBar: React.FC = () => {
             <h3 className="text-sm sm:text-base font-bold text-white">
               {currentStep.title}
             </h3>
+            <div className="flex items-center gap-1 mt-1" aria-hidden="true">
+              {DEMO_STEPS.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    setCurrentDemoStep(i);
+                    applyDemoStepPreset(i);
+                  }}
+                  className={`h-1.5 rounded-full transition-all ${i === currentDemoStep ? 'w-6 bg-amber-300' : i < currentDemoStep ? 'w-3 bg-indigo-300' : 'w-3 bg-white/20'}`}
+                  tabIndex={-1}
+                />
+              ))}
+            </div>
           </div>
         </div>
 
@@ -79,6 +95,16 @@ export const DemoModeBar: React.FC = () => {
             <span className="font-semibold text-white">{currentStep.instruction}</span>
             <span className="text-indigo-200 block truncate">👉 Lời thoại: {currentStep.systemHint}</span>
           </div>
+          {expected && (
+            <span
+              className={`ml-auto shrink-0 text-[10px] font-bold px-2 py-1 rounded-md whitespace-nowrap ${
+                matches ? 'bg-emerald-500/90 text-white' : 'bg-white/15 text-indigo-100'
+              }`}
+              title="Mức nguy cơ kịch bản mong đợi so với kết quả Rule Engine hiện tại"
+            >
+              {matches ? `✓ ${expected}` : `Mong đợi: ${expected} · Hiện tại: ${ruleResult.riskLevel}`}
+            </span>
+          )}
         </div>
 
         {/* Action Controls */}

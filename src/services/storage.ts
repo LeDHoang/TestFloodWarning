@@ -12,7 +12,7 @@ export const DEFAULT_GALLERY: MediaItem[] = [
     title: 'Mưa lớn tại Hà Nội',
     url: 'https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?w=800&auto=format&fit=crop&q=80',
     caption: 'Đợt mưa rào xối xả giờ tan tầm khiến nhiều tuyến đường Hà Nội quá tải thoát nước',
-    source: 'Tư liệu thời tiết Hà Nội',
+    source: 'Ảnh minh họa – Unsplash',
     category: 'rain',
   },
   {
@@ -20,7 +20,7 @@ export const DEFAULT_GALLERY: MediaItem[] = [
     title: 'Đường ngập cục bộ',
     url: 'https://images.unsplash.com/photo-1547683905-f686c993aae5?w=800&auto=format&fit=crop&q=80',
     caption: 'Nước dâng nhanh trên mặt đường nhựa do các cửa xả cống bị bồi lắng rác thải',
-    source: 'Ghi nhận thực tế đô thị',
+    source: 'Ảnh minh họa – Unsplash',
     category: 'flood',
   },
   {
@@ -28,7 +28,7 @@ export const DEFAULT_GALLERY: MediaItem[] = [
     title: 'Giao thông khó khăn',
     url: 'https://images.unsplash.com/photo-1508873696983-2df5293cbdaf?w=800&auto=format&fit=crop&q=80',
     caption: 'Xe máy và ô tô di chuyển chậm qua các đoạn trũng thấp trong giờ cao điểm',
-    source: 'Phóng sự giao thông',
+    source: 'Ảnh minh họa – Unsplash',
     category: 'traffic',
   },
   {
@@ -36,7 +36,7 @@ export const DEFAULT_GALLERY: MediaItem[] = [
     title: 'Hệ thống thoát nước đô thị',
     url: 'https://images.unsplash.com/photo-1541888946425-d0fbb18f15f6?w=800&auto=format&fit=crop&q=80',
     caption: 'Miệng cống ga thu nước đóng vai trò then chốt trong việc tiêu thoát nhanh',
-    source: 'Công trình thoát nước',
+    source: 'Ảnh minh họa – Unsplash',
     category: 'drain',
   },
   {
@@ -44,7 +44,7 @@ export const DEFAULT_GALLERY: MediaItem[] = [
     title: 'Rác tại khu vực thoát nước',
     url: 'https://images.unsplash.com/photo-1605600659908-0ef719419d41?w=800&auto=format&fit=crop&q=80',
     caption: 'Túi nilon, cành lá mục và vỏ chai che chắn các nan sắt ngăn dòng chảy vào cống',
-    source: 'Khảo sát thực địa NEWTON AI',
+    source: 'Ảnh minh họa – Unsplash',
     category: 'trash',
   },
 ];
@@ -60,7 +60,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   locationName: 'Ngã tư Cầu Giấy – Hà Nội',
   locationCoordinates: '21.0333° N, 105.7994° E',
   videoUrl: '',
-  youtubeId: 'dQw4w9WgXcQ', // fallback or customizable
+  youtubeId: '', // set to the team's own report video ID
   heroImageUrl: '',
   galleryImages: DEFAULT_GALLERY,
   savedROI: {

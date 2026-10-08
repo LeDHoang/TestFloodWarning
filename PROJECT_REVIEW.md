@@ -165,3 +165,38 @@ The biggest risk is that a judge reads the demo hint ("NORMAL"), sees **WATCH** 
 | 7 | Fix the `>` vs `>=` rain threshold; decide whether confidence should gate every BLOCKED rule | ~10 min |
 | 8 | Remove the template leftovers (unused deps, `react-example`, Rickroll ID, the "field survey" caption on a stock photo), and add a README | ~20 min |
 | 9 | Use a ref for the camera loop's busy flag; memoise the context value | ~15 min |
+
+---
+
+## 6. UI / storytelling review and changes made (dev branch)
+
+### What the UI got wrong about *conveying the idea*
+- **The core idea was never shown.** The idea is that trash blocks the drain, water can't drain away, and the road floods, but the Overview only showed text, badges and a box diagram. A judge had to read a lot before understanding the mechanism.
+- **The value proposition (early instead of late) was only stated in text** on the About page, never shown visually.
+- **Too much shouting.** All-caps labels, emoji and an icon side by side on almost every label (e.g. `📷` plus a Camera icon), and `animate-bounce`/`animate-pulse` on several elements at once. Nothing stands out when everything does.
+- **The pipeline diagram was wrong for 2 of 4 levels.** The "Alert" node showed a green "🟢 AN TOÀN" (safe) for any level other than HIGH, including WARNING.
+- **Demo Mode contradicted itself.** See §4 A1. There was no visible progress through the 7 steps, and nothing showed whether the screen matched the script.
+- **Mobile.** The brand name was truncated to "S", and the 10-item sidebar pushed all content below the fold.
+- **Offline venues.** All media were hot-linked from Unsplash and turned into black boxes with no network. Captions credited stock photos as the team's own field survey.
+
+### Changes implemented
+| Area | Change |
+|---|---|
+| **Live street scene** (`dashboard/FloodScene.tsx`) | An animated SVG cross-section in the Overview hero, driven entirely by live state. Rain density and speed follow mm/h. Trash pieces follow the AI class. Water on the road follows the water level, with a depth ruler. Flow particles in the sewer pipe slow down as the drain gets blocked. The camera's field of view and a dashed ROI box are drawn on the drain, coloured by risk. A one-line cause → effect sentence and the rule-engine verdict sit under it, along with 3 "try it" control groups (rain, drain, water). It respects `prefers-reduced-motion`. |
+| **"Why early?" timeline** (`dashboard/EarlyWarningTimeline.tsx`) | Two lanes compare *today* (rain → blocked drain → flood → residents call → crew arrives) with *SMART ANTI-FLOOD AI* (camera → AI detects → alert + ticket → crew clears → AI verifies). The second lane highlights the live stage ("Đang ở đây"). It replaces the redundant quick-action banner. |
+| Pipeline diagram | The Alert node now shows all 4 levels with the correct colours. |
+| Demo Mode | Presets and hints were fixed to match the engine. A step progress bar was added (click a dot to jump to that step). A live **"✓ expected"** or **"Expected X · Now Y"** chip was added. `npm test` now runs `scripts/check-demo-steps.ts` to stop the script and engine drifting apart again. |
+| Honesty | The mock-mode banner now says the result is the chosen state, not an analysis of the image. "Simulate cleanup" runs the same CLEAR ≥ threshold check instead of writing a hardcoded "96%". Media are credited as "Ảnh minh họa – Unsplash". The Rickroll default `youtubeId` was removed. |
+| Offline | Gallery cards show a themed placeholder (emoji + title) when a photo can't load. |
+| Real-model robustness | Class labels are normalised (`Blocked`, `partial blocked` … → enum). The settings page warns when the model is missing any of the 4 expected classes. tf.js and tmImage are pinned to `1.3.1` / `0.8.5`, because tmImage 0.8.5 declares tfjs 1.3.1 as its peer. |
+| Rule engine | The "above high threshold" reason text now uses the same `>` as the rule. The comment now matches the code. |
+| Mobile | Shorter brand name and compact header pills. The sidebar becomes a horizontal scrolling tab bar. The scene's info chips are hidden on small screens. |
+| Hygiene | Removed the unused `@google/genai`, `express`, `dotenv` and `@types/express`. Renamed the package to `smart-anti-flood-ai`. Added a README, a `.gitignore` and a `test` script. |
+
+### Further ideas not implemented (worth considering)
+1. **A "rainstorm replay" button.** It would play a scripted 60-second storm in the scene, with rain building, trash arriving, the alert firing, the crew cleaning and the water receding. That makes a perfect hands-free opening for a pitch.
+2. **A mini map of several drains around Cầu Giấy.** Each pin would be coloured by risk, showing how this scales from one camera to a city.
+3. **Real model evidence.** A confusion matrix and accuracy figure from the team's own held-out test images, on the "AI hoạt động thế nào?" page. This is the single biggest credibility gain.
+4. **Calmer visual language.** Drop the emoji where an icon already exists, use sentence case for most labels, and keep animation for the risk state only.
+5. **Start in a calm state** (NORMAL), so the first thing judges see is the system escalating, not an alarm already going off. The team's current default (HIGH on load) was left as is because it looks deliberate.
+6. **Real rain data** from an open weather API for Hanoi, as an optional input next to the slider.

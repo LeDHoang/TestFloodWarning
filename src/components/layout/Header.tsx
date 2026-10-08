@@ -28,8 +28,8 @@ export const Header: React.FC = () => {
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="text-lg lg:text-xl font-bold tracking-tight text-slate-900 truncate">
-                SMART ANTI-FLOOD AI
+              <h1 className="text-base sm:text-lg lg:text-xl font-bold tracking-tight text-slate-900 truncate">
+                <span className="hidden sm:inline">SMART </span>ANTI-FLOOD AI
               </h1>
               <span className="hidden sm:inline-block text-xs font-semibold px-2 py-0.5 rounded bg-sky-100 text-sky-800 tracking-wide">
                 NEWTON AI
@@ -45,11 +45,11 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Status & Actions Zone */}
-        <div className="flex items-center gap-2.5 sm:gap-4 shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-4 shrink-0">
           {/* AI Connection Status Indicator */}
           <div
             onClick={() => setActiveTab('settings')}
-            className={`cursor-pointer flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-medium transition-colors ${
+            className={`cursor-pointer flex items-center gap-2 px-2 sm:px-3 py-1.5 rounded-lg border text-xs font-medium transition-colors ${
               isModelConnected
                 ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
                 : 'bg-amber-50 border-amber-200 text-amber-800'
@@ -64,9 +64,7 @@ export const Header: React.FC = () => {
             <span className="hidden sm:inline">
               {isModelConnected ? '🟢 HỆ THỐNG HOẠT ĐỘNG' : '🟡 DÙNG MÔ HÌNH MÔ PHỎNG'}
             </span>
-            <span className="sm:hidden">
-              {isModelConnected ? 'ONLINE' : 'MOCK'}
-            </span>
+
           </div>
 
           {/* High Risk Alert Ping if active */}
@@ -90,7 +88,8 @@ export const Header: React.FC = () => {
             }`}
           >
             <Sparkles className="w-4 h-4 text-indigo-300" />
-            <span>🎓 DEMO MODE</span>
+            <span className="hidden sm:inline">🎓 DEMO MODE</span>
+            <span className="sm:hidden">DEMO</span>
             {demoModeActive && (
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
             )}

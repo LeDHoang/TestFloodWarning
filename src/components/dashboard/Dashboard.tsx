@@ -6,6 +6,8 @@
 
 import React from 'react';
 import { useApp } from '../../context/AppContext';
+import { FloodScene } from './FloodScene';
+import { EarlyWarningTimeline } from './EarlyWarningTimeline';
 import {
   CloudRain,
   Camera,
@@ -17,7 +19,6 @@ import {
   ShieldAlert,
   CheckCircle,
   Eye,
-  Sliders,
   Sparkles,
 } from 'lucide-react';
 
@@ -159,6 +160,10 @@ export const Dashboard: React.FC = () => {
             </button>
           </div>
         </div>
+
+        <div className="relative z-10 mt-6">
+          <FloodScene />
+        </div>
       </section>
 
       {/* Sơ đồ Hệ thống (Architecture Pipeline Diagram per Section 3) */}
@@ -252,14 +257,22 @@ export const Dashboard: React.FC = () => {
             <div
               onClick={() => setActiveTab('alerts')}
               className={`rounded-xl p-4 border-2 cursor-pointer transition-all text-center space-y-1.5 ${
-                ruleResult.isHighRisk
-                  ? 'bg-red-50 border-red-300 text-red-900 shadow-md shadow-red-500/10'
-                  : 'bg-emerald-50 border-emerald-200 text-emerald-900'
+                {
+                  NORMAL: 'bg-emerald-50 border-emerald-200 text-emerald-900',
+                  WATCH: 'bg-amber-50 border-amber-200 text-amber-900',
+                  WARNING: 'bg-orange-50 border-orange-300 text-orange-900',
+                  HIGH: 'bg-red-50 border-red-300 text-red-900 shadow-md shadow-red-500/10',
+                }[ruleResult.riskLevel]
               }`}
             >
               <div
                 className={`w-10 h-10 mx-auto rounded-xl flex items-center justify-center text-white shadow-md ${
-                  ruleResult.isHighRisk ? 'bg-red-600 animate-pulse' : 'bg-emerald-600'
+                  {
+                    NORMAL: 'bg-emerald-600',
+                    WATCH: 'bg-amber-500',
+                    WARNING: 'bg-orange-500',
+                    HIGH: 'bg-red-600 animate-pulse',
+                  }[ruleResult.riskLevel]
                 }`}
               >
                 <AlertTriangle className="w-5 h-5" />
@@ -268,7 +281,7 @@ export const Dashboard: React.FC = () => {
                 3. CẢNH BÁO
               </div>
               <div className="text-[11px] font-bold truncate">
-                {ruleResult.riskLevel === 'HIGH' ? '🚨 NGUY CƠ CAO' : '🟢 AN TOÀN'}
+                {riskStatus.title}
               </div>
               <span className="inline-block text-[10px] font-semibold bg-white/80 px-2 py-0.5 rounded">
                 Mức {ruleResult.priorityScore}/4
@@ -422,46 +435,8 @@ export const Dashboard: React.FC = () => {
         </div>
       </section>
 
-      {/* Quick Action Banner */}
-      <section className="bg-slate-100 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 border border-slate-200">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-white border border-slate-300 flex items-center justify-center text-slate-700 shadow-sm shrink-0">
-            <Sliders className="w-5 h-5 text-sky-600" />
-          </div>
-          <div>
-            <div className="text-sm font-bold text-slate-800">
-              Kiểm thử Kịch bản Nhanh cho Ban Giám Khảo
-            </div>
-            <div className="text-xs text-slate-500">
-              Chọn nhanh trạng thái cống và lượng mưa để quan sát hệ thống phản ứng tức thì
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-2">
-          <button
-            onClick={() => setActiveTab('camera')}
-            className="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-800 text-xs font-semibold border border-slate-300 shadow-sm transition-all"
-          >
-            Chỉnh ROI & Camera
-          </button>
-          <button
-            onClick={() => setActiveTab('rain')}
-            className="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-800 text-xs font-semibold border border-slate-300 shadow-sm transition-all"
-          >
-            Kéo Slider Mưa & Nước
-          </button>
-          <button
-            onClick={() => {
-              createTicket();
-              setActiveTab('tickets');
-            }}
-            className="px-3.5 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold shadow-md shadow-sky-600/20 transition-all"
-          >
-            + Tạo Ticket Cấp Bách
-          </button>
-        </div>
-      </section>
+      {/* Before / after story */}
+      <EarlyWarningTimeline />
     </div>
   );
 };

@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+/* ---- Live street scene (FloodScene) ---- */
+@keyframes fs-fall {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-18px, 260px); }
+}
+@keyframes fs-wave {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100px); }
+}
+@keyframes fs-flow {
+  from { transform: translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  to { transform: translateX(320px); opacity: 0; }
+}
+@keyframes fs-dash {
+  to { stroke-dashoffset: -20; }
+}
+@keyframes fs-blink {
+  50% { opacity: 0.15; }
+}
+.fs-drop { animation: fs-fall 1s linear infinite; }
+.fs-wave { animation: fs-wave 3s linear infinite; }
+.fs-flow { animation: fs-flow 4s linear infinite; }
+.fs-roi { animation: fs-dash 1.2s linear infinite; }
+.fs-flow-in { stroke-dasharray: 6 5; animation: fs-dash 0.8s linear infinite; }
+.fs-blink { animation: fs-blink 1.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fs-drop, .fs-wave, .fs-flow, .fs-roi, .fs-flow-in, .fs-blink { animation: none; }
+}

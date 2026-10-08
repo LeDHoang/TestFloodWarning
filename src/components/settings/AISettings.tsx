@@ -6,6 +6,7 @@
 
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
+import { missingClasses } from '../../services/teachableMachine';
 import {
   Settings,
   Brain,
@@ -310,6 +311,13 @@ export const AISettings: React.FC = () => {
                     </span>
                   ))}
                 </div>
+                {missingClasses(modelSession.classNames).length > 0 && (
+                  <p className="text-xs font-semibold text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+                    ⚠️ Model thiếu class: {missingClasses(modelSession.classNames).join(', ')}. Rule Engine chỉ hiểu 4 nhãn
+                    CLEAR, TRASH_NEARBY, PARTIAL_BLOCKED, BLOCKED – hãy đặt tên class trong Teachable Machine đúng như vậy,
+                    nếu không cảnh báo sẽ không được kích hoạt.
+                  </p>
+                )}
               </div>
             )}
 

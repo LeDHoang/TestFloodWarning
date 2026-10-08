@@ -45,7 +45,7 @@ export function evaluateRiskRules(input: RuleEngineInput): RuleEvaluationResult 
   const matchedRules: string[] = [];
 
   // Build descriptive reason labels
-  if (rainMmPerHour >= rainThresholdHigh) {
+  if (rainMmPerHour > rainThresholdHigh) {
     reasons.push(`Mưa lớn vượt ngưỡng cấp 2: ${rainMmPerHour} mm/h`);
   } else if (rainMmPerHour >= rainThresholdWatch) {
     reasons.push(`Lượng mưa sẵn sàng cảnh báo: ${rainMmPerHour} mm/h`);
@@ -96,7 +96,7 @@ export function evaluateRiskRules(input: RuleEngineInput): RuleEvaluationResult 
   }
 
   // Rule 3: WARNING
-  // Rain > 50 AND AI = PARTIAL_BLOCKED OR (Rain >= 20 and AI = BLOCKED) OR Water = HIGH
+  // Rain > 50 AND AI = PARTIAL_BLOCKED OR (Rain >= 20 and AI = BLOCKED) OR Water = HIGH OR (Water = MEDIUM and Rain > 50)
   if ((isRainHigh && isPartialBlocked) || (isRainWatch && isBlocked) || isWaterHigh || (isWaterMedium && isRainHigh)) {
     matchedRules.push('RULE_WARNING_02: Mưa lớn kết hợp tắc nghẽn một phần hoặc mực nước dâng cao');
     return {

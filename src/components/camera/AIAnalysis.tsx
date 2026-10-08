@@ -102,6 +102,9 @@ export const AIAnalysis: React.FC = () => {
                   <p className="text-amber-800 text-[11px] mt-0.5">
                     Hệ thống đang chạy chế độ mô phỏng (Mock AI) cho buổi thuyết trình.
                   </p>
+                  <p className="text-amber-800 text-[11px] mt-1 font-semibold">
+                    Kết quả bên dưới là trạng thái bạn chọn ở đây, không phải AI phân tích ảnh. Kết nối model thật để AI đọc ảnh tải lên.
+                  </p>
                 </div>
               </div>
               <button

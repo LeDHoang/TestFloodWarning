@@ -24,6 +24,7 @@ import {
   X,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { generateMockPrediction } from '../../services/teachableMachine';
 
 export const TicketManager: React.FC = () => {
   const {
@@ -32,6 +33,7 @@ export const TicketManager: React.FC = () => {
     updateTicketStatus,
     aiPrediction,
     setMockClass,
+    setAIPrediction,
     settings,
     lastSnapshotDataUrl,
     setActiveTab,
@@ -79,23 +81,27 @@ export const TicketManager: React.FC = () => {
   };
 
   const handleSimulateCleanAndResolve = () => {
-    // Quick helper for demo presentation: simulate that worker swept the leaves!
+    // Quick helper for demo presentation: simulate that worker swept the leaves,
+    // then run the same CLEAR >= threshold check as a real re-check (mock camera frame).
     setMockClass('CLEAR');
+    const pred = generateMockPrediction('CLEAR');
+    setAIPrediction(pred);
+    const confidencePct = Math.round(pred.confidence * 100);
+    const passed = pred.topClass === 'CLEAR' && confidencePct >= thresholdPercent;
     setTimeout(() => {
-      setRecheckSuccess(true);
+      setRecheckSuccess(passed);
+      if (!passed || !recheckModalTicket) return;
       confetti({
         particleCount: 120,
         spread: 80,
         origin: { y: 0.6 },
       });
-      if (recheckModalTicket) {
-        updateTicketStatus(
-          recheckModalTicket.id,
-          'RESOLVED',
-          'Nghiệm thu thực địa: Công nhân đã vớt sạch rác. Camera AI xác nhận CLEAR 96%',
-          lastSnapshotDataUrl || undefined
-        );
-      }
+      updateTicketStatus(
+        recheckModalTicket.id,
+        'RESOLVED',
+        `Nghiệm thu (mô phỏng): Công nhân đã vớt sạch rác. Camera AI mô phỏng CLEAR ${confidencePct}%`,
+        lastSnapshotDataUrl || undefined
+      );
     }, 400);
   };
 

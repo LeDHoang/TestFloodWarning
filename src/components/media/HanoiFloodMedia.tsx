@@ -128,7 +128,7 @@ export const HanoiFloodMedia: React.FC = () => {
               <span>HÌNH ẢNH THỰC TẾ</span>
             </h3>
             <p className="text-xs text-slate-500">
-              Khảo sát thực địa các điểm thoát nước tại Thủ đô Hà Nội
+              Ảnh minh họa tình trạng mưa ngập và thoát nước đô thị
             </p>
           </div>
 
@@ -150,15 +150,33 @@ export const HanoiFloodMedia: React.FC = () => {
             >
               {/* Image Frame with graceful CSS/SVG fallback */}
               <div className="relative aspect-[4/3] bg-slate-900 overflow-hidden">
+                {/* Offline placeholder sitting behind the photo (shown if it fails to load) */}
+                <div
+                  className={`absolute inset-0 flex flex-col items-center justify-center text-center p-4 bg-gradient-to-br ${
+                    {
+                      rain: 'from-slate-800 to-sky-900',
+                      flood: 'from-sky-900 to-blue-950',
+                      traffic: 'from-slate-800 to-amber-900',
+                      drain: 'from-slate-800 to-slate-950',
+                      trash: 'from-lime-950 to-amber-950',
+                    }[img.category]
+                  }`}
+                  aria-hidden="true"
+                >
+                  <span className="text-4xl mb-2">
+                    {{ rain: '🌧️', flood: '🌊', traffic: '🛵', drain: '🕳️', trash: '🗑️' }[img.category]}
+                  </span>
+                  <span className="text-sm font-bold text-white/90">{img.title}</span>
+                  <span className="text-[10px] text-white/50 mt-1">Ảnh chưa tải được (ngoại tuyến)</span>
+                </div>
                 <img
                   src={img.url}
                   alt={img.title}
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="relative w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   onError={(e) => {
-                    // Replace with styled fallback container
+                    // Reveal the placeholder behind
                     e.currentTarget.style.display = 'none';
-                    e.currentTarget.parentElement?.classList.add('flex', 'items-center', 'justify-center', 'p-4');
                   }}
                 />
                 <div className="absolute top-2 right-2 px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-md text-[10px] font-bold text-white uppercase">

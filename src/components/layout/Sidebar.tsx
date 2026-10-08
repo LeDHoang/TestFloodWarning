@@ -59,9 +59,9 @@ export const Sidebar: React.FC = () => {
   ];
 
   return (
-    <aside className="w-full md:w-64 bg-white border-r border-slate-200 flex flex-col shrink-0 select-none">
+    <aside className="w-full md:w-64 bg-white border-b md:border-b-0 md:border-r border-slate-200 flex flex-col shrink-0 select-none">
       {/* Navigation List */}
-      <nav className="p-3 space-y-1.5 flex-1 overflow-y-auto">
+      <nav className="p-2 md:p-3 flex md:flex-col gap-1.5 md:flex-1 overflow-x-auto md:overflow-x-visible md:overflow-y-auto">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;
@@ -70,7 +70,7 @@ export const Sidebar: React.FC = () => {
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all text-left ${
+              className={`shrink-0 md:w-full flex items-center justify-between gap-2 px-3 md:px-3.5 py-2 md:py-2.5 rounded-xl text-sm font-semibold transition-all text-left whitespace-nowrap ${
                 isActive
                   ? 'bg-sky-600 text-white shadow-sm shadow-sky-600/25'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
@@ -98,7 +98,7 @@ export const Sidebar: React.FC = () => {
       </nav>
 
       {/* Team Newton Footer Tag */}
-      <div className="p-4 border-t border-slate-100 bg-slate-50/60 text-center">
+      <div className="hidden md:block p-4 border-t border-slate-100 bg-slate-50/60 text-center">
         <div className="text-xs font-bold text-slate-800 tracking-wider">
           ĐỘI THI NEWTON AI
         </div>

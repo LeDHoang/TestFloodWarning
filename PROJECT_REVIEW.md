@@ -1,6 +1,6 @@
 # SMART ANTI-FLOOD AI — Project Review (MVP / Hackathon Demo)
 
-> Review date: 2026-10-08 · Scope: whole repository at commit `02e4f0a`
+> Review date: 2026-10-08 (competition section added 2026-10-11) · Scope: repository at commit `02e4f0a`; §6 and §7 reflect the `dev` branch
 > Method: a full code read by the lead reviewer, then two independent agents argued opposite sides (**Advocate**: pros, **Critic**: cons). Every claim was backed with file:line evidence, and the key claims were re-verified.
 > Build status: `tsc --noEmit` ✅ passes · `vite build` ✅ passes (431 KB JS / 121 KB gzip)
 
@@ -166,6 +166,10 @@ The biggest risk is that a judge reads the demo hint ("NORMAL"), sees **WATCH** 
 | 8 | Remove the template leftovers (unused deps, `react-example`, Rickroll ID, the "field survey" caption on a stock photo), and add a README | ~20 min |
 | 9 | Use a ref for the camera loop's busy flag; memoise the context value | ~15 min |
 
+
+### Status on `dev` (2026-10-11)
+Done on `dev`: #1, #2, #3, #4, #5, #7 (the reason text now matches `>`), #8 and #9, plus a `bun run test` check for the demo steps. Still open: **#6 (real accuracy numbers)**. The "no README / 2 commits" remark in §1–§4 is outdated; a README exists now. §3's "works offline from the model" claim is wrong, because tf.js still loads from a CDN. One engine/table mismatch also remains: the Alerts table in the UI does not list every WARNING and HIGH path in `ruleEngine.ts`.
+
 ---
 
 ## 6. UI / storytelling review and changes made (dev branch)
@@ -200,3 +204,43 @@ The biggest risk is that a judge reads the demo hint ("NORMAL"), sees **WATCH** 
 4. **Calmer visual language.** Drop the emoji where an icon already exists, use sentence case for most labels, and keep animation for the risk state only.
 5. **Start in a calm state** (NORMAL), so the first thing judges see is the system escalating, not an alarm already going off. The team's current default (HIGH on load) was left as is because it looks deliberate.
 6. **Real rain data** from an open weather API for Hanoi, as an optional input next to the slider.
+
+---
+
+## 7. Competition context and readiness (added 2026-10-11)
+
+> **Caveat:** the sandbox could not open ai.tainangviet.vn (DNS/403). Everything below comes from search snippets and press articles, and the Advocate and Critic agents both failed to find the scoring rubric. **Treat every item as unverified until a team member reads the official plan PDF (`tainangviet.vn/source/files/AI2026_Ke hoach_The le_phathanh.pdf`) and `/faq`.** Do not borrow criteria from "Sáng tạo trẻ Hà Nội 2026", which is a different contest.
+
+### What was found
+- **Contest:** Cuộc thi Sáng tạo trẻ quốc gia về AI 2026, run by Trung ương Đoàn, launched 18/07/2026. Ages 12–22. Bảng A = THCS (12–15), B = THPT (16–18), C = students (19–22). Teams of at most 3. Which band NEWTON AI is in depends on the members' ages.
+- **Rounds:** sơ loại, khu vực, chung kết. South regional was 10/10. **North/Central regional is 17/10/2026, six days from this review.** Bảng A/B: a 10-minute MVP defense plus a 6-hour mini-hackathon with change-requests from the organizers. The final (about 20–22/11, Hanoi) adds a 12-hour improvement challenge and a rebuttal.
+- **Dossier:** Bảng A is a PDF of at most 8 pages, a video of at most 5 minutes, a demo video of at most 3 minutes, and **prompt history and development evidence**. Bảng B is a 12-page PDF with **test evidence** and an honest declaration of tools, data and code. An integrity pledge applies.
+- **Scoring:** one source says 60% regional and 40% dossier. No rubric found.
+- **Dates conflict:** free-team registration was reported as 10/07–20/09 and provincial submission as 30/09. Confirm the team is registered and its dossier was accepted.
+
+### Fit (Advocate)
+Real local problem, clear pipeline (camera → ROI → classifier → rules → ticket → re-check), honest AI/rules/simulated labelling that matches a tool-declaration culture, explainable output (`reasons`, `matchedRules`), a settings-driven engine and swap-by-URL model that suit change-requests, and a demo test that keeps the 7 steps in line with the engine.
+
+### Risks (Critic)
+1. **No real AI evidence.** No model, dataset or held-out metrics in the repo; mock mode is the default. The redesign's model numbers are illustrative and must be replaced before use. Showing invented metrics to judges is an integrity problem.
+2. **Circular mock test.** The "dataset test" predicts the expected class and then compares it to the same class (`AppContext.tsx` ~292).
+3. **Change-request fragility.** The engine is hard-coded to four class names and fixed rules (`ruleEngine.ts` ~63–138); `AppContext.tsx` is one large file.
+4. **Thin AI depth.** Teachable Machine is easy to replace. The strongest answer is the engineering and the real-world loop, not the model.
+5. **Integrity.** The repo was built with AI help. There is no prompt-history or development-log file, which Bảng A (and possibly B) asks for. Every member must be able to explain every file.
+6. **Venue risk.** CDN scripts and hot-linked images need internet. Vendor tf.js and use local images.
+7. **Presentation over substance.** `design/` and `redesign/` are mock-data front ends.
+
+### Added to the priority list
+| # | Fix | Effort |
+|---|---|---|
+| 10 | Read the official PDF and `/faq` today; record criteria, band, AI-tool policy, what to bring | 30 min |
+| 11 | Train on real drain photos (aim for 100+ per class), hold out a test set, report accuracy and a confusion matrix with one failure example (this is #6, now urgent) | team work |
+| 12 | Add `DEVELOPMENT_LOG.md`: prompt history, what AI tools wrote, what the team wrote, data sources | 1–2 h |
+| 13 | Drill a 30-minute change-request: add a class, swap the model, add a rule, add one real input (open weather API or an ESP32 reading) | 2 h |
+| 14 | Vendor tf.js and local images; keep a build that runs offline; put it on a USB stick | 1 h |
+| 15 | Rebuttal Q&A: why Teachable Machine, false alarms, CCTV privacy, scaling cost, maintenance, why rules instead of ML | 1 h |
+| 16 | Backups: screen recording of the demo, a one-page printout | 1 h |
+| 17 | Align the Alerts table with the engine (see the status note above) | 30 min |
+
+### Readiness verdict
+The concept fits a "real problem solved with AI" contest well and is unusually honest and explainable. For a 17/10 defense plus a hackathon, the biggest gaps are **real model evidence**, **a development log**, and **change-request speed**, not UI.
